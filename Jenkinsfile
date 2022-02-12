@@ -14,7 +14,7 @@ pipeline {
                 
                 //sh 'cd /home/vagrant/mysql ; terraform apply -auto-approve'
                 //sh 'IPADD=$(az vm show -d -g res -n mysql  --query publicIps -o tsv); printf "[mysql]\n$IPADD" > /home/vagrant/ansible/host'
-                sleep(time: 2, unit: "SECONDS")
+                sleep(time: 1, unit: "SECONDS")
                 sh 'ls'
             }
         }
