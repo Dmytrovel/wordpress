@@ -22,7 +22,7 @@ pipeline {
         
         stage('ansible wordpress') { 
             steps {
-                
+                  sh 'id'
                 //sh 'cat /home/vagrant/ansible/host.txt'
                 //sh 'ansible-playbook /home/vagrant/ansible/test_deploy.yml -i /home/vagrant/ansible/host.txt -b' 
                 //sh 'cat /home/vagrant/ansible/host.txt'
@@ -33,7 +33,7 @@ pipeline {
         
         stage('clone git hub') { 
             steps {
-                sh 'git clone https://github.com/Dmytrovel/wordpress.git'
+                //sh 'git clone https://github.com/Dmytrovel/wordpress.git'
                 sh 'ls -la'
                 //sh 'cat /home/vagrant/ansible/host.txt'
                 //sh 'ansible-playbook /home/vagrant/ansible/mysql.yml -i /home/vagrant/ansible/host -b' 
