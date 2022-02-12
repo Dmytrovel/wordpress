@@ -31,9 +31,10 @@ pipeline {
             }
         }
         
-        stage('ansible mysql') { 
+        stage('clone git hub') { 
             steps {
-                sh 'ls'
+                sh 'git clone https://github.com/Dmytrovel/wordpress.git'
+                sh 'ls '
                 //sh 'cat /home/vagrant/ansible/host.txt'
                 //sh 'ansible-playbook /home/vagrant/ansible/mysql.yml -i /home/vagrant/ansible/host -b' 
                 //sh 'cat /home/vagrant/ansible/host'
