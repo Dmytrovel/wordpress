@@ -31,7 +31,7 @@ pipeline {
             }
         }
         
-        stage('copy wordpress') { 
+        stage('copy wordpress1') { 
             steps {
                 //sh 'git clone https://github.com/Dmytrovel/wordpress.git'
                  sh 'scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/j/  azureuser@$IPADD:/var/www/html/'
