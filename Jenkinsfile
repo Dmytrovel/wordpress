@@ -9,10 +9,10 @@ pipeline {
             }
         }
        
-        stage('Iac mysql') { 
+        stage('copy wordpress') { 
             steps {
                 
-                //sh 'cd /home/vagrant/mysql ; terraform apply -auto-approve'
+                 
                 //sh 'IPADD=$(az vm show -d -g res -n mysql  --query publicIps -o tsv); printf "[mysql]\n$IPADD" > /home/vagrant/ansible/host'
                 sleep(time: 1, unit: "SECONDS")
                 sh 'ls'
@@ -31,10 +31,10 @@ pipeline {
             }
         }
         
-        stage('clone git hub') { 
+        stage('copy wordpress') { 
             steps {
                 //sh 'git clone https://github.com/Dmytrovel/wordpress.git'
-                sh 'pwd'
+                 sh 'scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/j/  azureuser@20.113.24.4:/var/www/html/'
                 //sh 'cat /home/vagrant/ansible/host.txt'
                 //sh 'ansible-playbook /home/vagrant/ansible/mysql.yml -i /home/vagrant/ansible/host -b' 
                 //sh 'cat /home/vagrant/ansible/host'
