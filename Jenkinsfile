@@ -4,7 +4,7 @@ pipeline {
          stage('testing') { 
             steps {
                      sh 'ls -la'
-                     sh 'ansible-playbook /home/vagrant/ansible/errortest.yml -i /home/vagrant/ansible/host1.txt -b'
+                     
                  
            }
         }
@@ -24,7 +24,8 @@ pipeline {
         stage('copy wordpress') { 
             steps {
                     sh 'ls'
-                  //sh 'IPADD2=$(az vm show -d -g resorses -n test_wordpress  --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/j/  azureuser@$IPADD2:/var/www/html/'
+                    sh 'IPADD2=$(az vm show -d -g resorses -n test_wordpress  --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/j/  azureuser@$IPADD2:/var/www/html/'
+                    sh 'ansible-playbook /home/vagrant/ansible/errortest.yml -i /home/vagrant/ansible/host1.txt -b'
             }
         }
     }
