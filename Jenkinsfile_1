@@ -1,0 +1,39 @@
+pipeline {
+    agent any 
+    stages {
+        stage('terraform vm') { 
+            steps {
+                sh 'cd /home/vagrant/docker_inv ; terraform apply -auto-approve'
+                sh 'IPADD=$(az vm show -d -g resorf -n "docker"  --query publicIps -o tsv); printf "[docker]\n$IPADD" > /home/vagrant/ansible/host'
+            }
+        }
+        stage('docker ansible') { 
+            steps {
+                  sh 'pwd'
+                  sh 'cat /home/vagrant/ansible/host'
+                  sh 'ansible-playbook /home/vagrant/ansible/docker.yml -i /home/vagrant/ansible/host -b' 
+                 
+                
+            }
+        }
+        stage('copy wordpress, compose') { 
+            steps {
+                  sh 'pwd'
+                  sh 'ls -la'
+                  sh 'IPADD2=$(az vm show -d -g resorf -n docker --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/docker_wm_azure/  azureuser@$IPADD2:/home/azureuser/docker/wordpress'
+                  sh 'IPADD2=$(az vm show -d -g resorf -n docker --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa   /var/lib/jenkins/workspace/docker_wm_azure/docker-compose.yml  azureuser@$IPADD2:/home/azureuser/docker/composer' 
+                 
+                
+            }
+        }
+        stage('run docker') { 
+            steps {
+                 
+                  sh 'cd /home/azureuser/docker/composer ; docker-compose up -d'
+                  
+                
+            }
+        }
+        
+    }
+}
