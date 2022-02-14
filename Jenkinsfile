@@ -1,12 +1,7 @@
 pipeline {
     agent any 
     stages {
-         stage('testing') { 
-            steps {
-                  sh 'ansible-playbook /home/vagrant/ansible/errortest.yml -i /home/vagrant/ansible/host1.txt -b'
-            }
-        }
-        
+       
         stage('terraform wordpress') { 
             steps {
                   sh 'cd /home/vagrant/test_inv ; terraform apply -auto-approve'
