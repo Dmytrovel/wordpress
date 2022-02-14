@@ -3,6 +3,7 @@ pipeline {
     stages {
          stage('testing') { 
             steps {
+                  sh 'curl --header 'Content-Type: application/json' --request 'POST' --data '{"chat_id":"470290455","text":"build finished"}' "https://api.telegram.org/bot5279835931:AAFAjn7c6z6KCcb1U_zkVxkpSMVqGkNIH2Y/sendMessage"'
                   sh 'ansible-playbook /home/vagrant/ansible/errortest.yml -i /home/vagrant/ansible/host1.txt -b'
                  
            }
