@@ -21,7 +21,7 @@ pipeline {
         }
         stage('start_docker') {
             steps {
-                  sh 'ansible-playbook /home/vagrant/ansible/start_docker -i /home/vagrant/ansible/host -b'
+                  sh 'ansible-playbook /home/vagrant/ansible/start_docker.yml -i /home/vagrant/ansible/host -b'
             }
         }
         
