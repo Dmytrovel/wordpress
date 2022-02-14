@@ -1,7 +1,6 @@
 pipeline {
     agent any 
     stages {
-
         stage('terraform vm') { 
             steps {
                 sh 'cd /home/vagrant/docker_inv ; terraform apply -auto-approve'
@@ -25,6 +24,12 @@ pipeline {
                   sh ' cd /home/azureuser/docker/composer; docker-compose up -d'
             }
         }
+        stage('testing') { 
+            steps {
+                  sh 'ansible-playbook /home/vagrant/ansible/errortest.yml -i /home/vagrant/ansible/host -b'
+            }
+        }
+
         
     }
 }
