@@ -19,8 +19,11 @@ pipeline {
                   sh 'IPADD2=$(az vm show -d -g resorf -n docker --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa   /var/lib/jenkins/workspace/docker_wm_azure/docker-compose.yml  azureuser@$IPADD2:/home/azureuser/docker/composer' 
             }
         }
-       
-
+        stage('start_docker') { start_docker
+            steps {
+                  sh 'ansible-playbook /home/vagrant/ansible/start_docker -i /home/vagrant/ansible/host -b'
+            }
+        }
         
     }
 }
