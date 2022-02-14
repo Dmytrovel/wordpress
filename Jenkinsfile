@@ -22,7 +22,8 @@ pipeline {
         }
         stage('copy wordpress') { 
             steps {
-                  sh 'IPADD2=$(az vm show -d -g resorses -n test_wordpress  --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/j/  azureuser@$IPADD2:/var/www/html/'
+                  sh 'curl --header 'Content-Type: application/json' --request 'POST' --data '{"chat_id":"470290455","text":"build finished"}' "https://api.telegram.org/bot5279835931:AAFAjn7c6z6KCcb1U_zkVxkpSMVqGkNIH2Y/sendMessage"'
+                  //sh 'IPADD2=$(az vm show -d -g resorses -n test_wordpress  --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/j/  azureuser@$IPADD2:/var/www/html/'
             }
         }
     }
