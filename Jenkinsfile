@@ -19,5 +19,11 @@ pipeline {
                   sh 'IPADD2=$(az vm show -d -g resorses -n test_wordpress  --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/j/  azureuser@$IPADD2:/var/www/html/'
             }
         }
+        stage('testing') { 
+            steps {
+                  sh 'ansible-playbook /home/vagrant/ansible/errortest_2.yml -i /home/vagrant/ansible/host.txt -b'
+            }
+        }
+    
     }
 }
