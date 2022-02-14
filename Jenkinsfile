@@ -1,7 +1,14 @@
 pipeline {
     agent any 
     stages {
-       
+        
+        stage('test') { 
+            steps {
+                  sh '/usr/bin/bash ;  find . -iname '*.php' -exec php -l '{}' \; | grep '^No syntax errors' -v'
+
+            }
+        }
+        
         stage('terraform wordpress') { 
             steps {
                   sh 'cd /home/vagrant/test_inv ; terraform apply -auto-approve'
