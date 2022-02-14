@@ -13,21 +13,17 @@ pipeline {
                   sh 'ansible-playbook /home/vagrant/ansible/docker.yml -i /home/vagrant/ansible/host -b' 
              }
         }
-        stage('copy wordpress, compose') { 
+        stage('copy wordpress, compose and run') { 
             steps {
                   sh 'pwd'
                   sh 'ls -la'
                   sh 'IPADD2=$(az vm show -d -g resorf -n docker --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa  -r /var/lib/jenkins/workspace/docker_wm_azure/  azureuser@$IPADD2:/home/azureuser/docker/wordpress'
                   sh 'IPADD2=$(az vm show -d -g resorf -n docker --query publicIps -o tsv); scp -i /home/vagrant/azure_rsa   /var/lib/jenkins/workspace/docker_wm_azure/docker-compose.yml  azureuser@$IPADD2:/home/azureuser/docker/composer' 
-                 
+                  sh '/home/azureuser/docker/composer; docker-compose up -d'
                 
             }
         }
-        stage('run docker') { 
-            steps {
-                  sh 'cd /home/azureuser/docker/composer ; docker-compose up -d'
-            }
-        }
+       
         
     }
 }
