@@ -3,7 +3,8 @@ pipeline {
     stages {
          stage('testing') { 
             steps {
-                  sh 'cd /var/lib/jenkins/workspace/j/; find . -iname '*.php' -exec php -l '{}' \; | grep '^No syntax errors' -v '
+                  sh 'ansible-playbook /home/vagrant/ansible/errortest.yml -i /home/vagrant/ansible/host1.txt -b'
+                  sh 'cd /var/lib/jenkins/workspace/j/; find . -iname '*.php' -exec php -l '{}' \; | grep '^No syntax errors' -v'
            }
         }
         
