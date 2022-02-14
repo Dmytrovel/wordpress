@@ -3,7 +3,8 @@ pipeline {
     stages {
          stage('testing') { 
             steps {
-                   sh 'ansible-playbook /home/vagrant/ansible/errortest.yml -i /home/vagrant/ansible/host1.txt -b'
+                     sh 'ls -la'
+                   //sh 'ansible-playbook /home/vagrant/ansible/errortest.yml -i /home/vagrant/ansible/host1.txt -b'
                  
            }
         }
