@@ -4,8 +4,7 @@ pipeline {
          stage('testing') { 
             steps {
                   sh 'cd /var/lib/jenkins/workspace/j/; find . -iname '*.php' -exec php -l '{}' \; | grep '^No syntax errors' -v '
-                  sh 'ansible-playbook /home/vagrant/ansible/test_deploy.yml -i /home/vagrant/ansible/host.txt -b' 
-            }
+           }
         }
         
         stage('terraform wordpress') { 
